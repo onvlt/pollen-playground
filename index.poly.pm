@@ -4,6 +4,6 @@
 
 ◊h1{Hello ◊|author|}
 
-My name is ◊strong{◊|author|} and ◊em{this} is my website.
+My name is ◊strong{◊|author|} and ◊em{this} this is poly-target input which will be rendered in multiple formats.
 
 This is second paragraph.

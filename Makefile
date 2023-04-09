@@ -13,4 +13,4 @@ index.pdf: index.context
 	context index.context
 
 clean:
-	rm -rf index.{context,html,log,pdf,tuc} index-export compiled
+	rm -rf index.{context,html,log,pdf,tuc,css} index-export compiled
