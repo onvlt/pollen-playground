@@ -1,10 +1,15 @@
-#lang racket
-(require pollen/decode pollen/misc/tutorial txexpr)
+#lang racket/base
+(require pollen/core pollen/decode pollen/misc/tutorial txexpr)
 (provide (all-defined-out))
 
 ; Project metadata
 (define author "Ondřej Nývlt")
 (define theme-color "hsl(5 70% 45%)")
+
+; Pollen setup
+(module setup racket/base
+  (provide (all-defined-out))
+  (define poly-targets '(html context)))
 
 ; Transform output
 (define (root . elements)

@@ -4,3 +4,4 @@ compiled/
 # for pollen
 pollen-cache/
 *.html
+*.context

@@ -10,5 +10,5 @@
 
   <link rel="stylesheet" type="text/css" href="styles.css" />
 </head>
-<body>◊(->html doc)</body>
+<body>◊(->html doc #:splice? #t)</body>
 </html>
