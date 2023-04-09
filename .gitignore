@@ -1,0 +1,6 @@
+# for Racket
+compiled/
+
+# for pollen
+pollen-cache/
+*.html
