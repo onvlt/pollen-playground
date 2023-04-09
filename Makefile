@@ -1,17 +1,10 @@
-export POLLEN := BUILD
-.PHONY: build go build-helper quick test
+.PHONY: clean
 
-build: test build-helper go
+index.context:
+	raco pollen render index.context
 
-go:
-	raco pollen render -p
-	raco pollen publish
+index.pdf: index.context
+	context index.context
 
-build-helper:
-	raco pollen reset
-	raco pollen setup -p
-
-quick: go
-
-test:
-	echo $${POLLEN}
+clean:
+	rm -f index.log index.tuc

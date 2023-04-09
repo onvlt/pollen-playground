@@ -5,3 +5,9 @@ compiled/
 pollen-cache/
 *.html
 *.context
+
+# context
+*-export/
+*.log
+*.pdf
+*.tuc
