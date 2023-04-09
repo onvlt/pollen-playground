@@ -5,10 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>◊(or (select 'title metas) (select 'h1 doc))</title>
+  <title>◊(or (select 'title metas) (select 'title doc))</title>
   <meta name="theme-color" content="◊|theme-color|" />
 
   <link rel="stylesheet" type="text/css" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet" />
 </head>
-<body>◊(->html doc #:splice? #t)</body>
+<body><div class="container">◊(->html doc #:splice? #t)</div></body>
 </html>

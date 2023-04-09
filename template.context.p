@@ -3,35 +3,15 @@
 \mainlanguage[cs]
 \setupinteraction
   [state=start,
-  title={◊(or (select 'title metas) (select 'h1 doc))},
+  title={◊(or (select 'title metas) (select 'title doc))},
   author={◊|author|}]
 
-\setuplayout[
-  width=fit,
+\setuplayout
+  [width=fit,
   height=fit,
-  backspace=3.8cm,
-  topspace=1.6cm,
-]
+  backspace=3.2cm,
+  topspace=1.4cm]
 
-\definelayout[titlepage][
-  topspace=0cm,
-  header=0cm,
-  headerdistance=0cm,
-  topdistance=0cm,
-  top=0cm,
-]
-
-\definemakeup[titlepage][
-  align=middle,
-  style=\tfa,
-]
-
-\definemakeup[bottom][
-  bottom=,
-  pagestate=start,
-]
-
-% make chapter, section bookmarks visible when opening document
 \placebookmarks[chapter, section, subsection, subsubsection, subsubsubsection, subsubsubsubsection][chapter, section]
 \setupinteractionscreen[option=bookmark]
 
@@ -71,23 +51,14 @@
 \setupbodyfont[mainface,12pt]
 
 \setupwhitespace[medium]
-\setupinterlinespace[line=3.8ex]
+\setupinterlinespace[line=3.2ex]
 
-\setuphead[section]
-  [style={\tfc\setupinterlinespace[line=3.4ex]},
-  page=odd,
+\setuphead[chapter][style={\tfc\setupinterlinespace[line=3ex]}]
+\setuphead[section][style={\tfa\bf}]
+\setuphead[subsection][style=\bf]
+\setuphead[chapter, section, subsection]
+  [number=no,
   align=flushleft]
-
-\setuphead[subsection]
-  [style={\tfb\setupinterlinespace[line=3.4ex]},
-  align=flushleft]
-
-\setuphead[subsubsection][style=\bf]
-\setuphead[subsubsubsection][style=\sc]
-\setuphead[subsubsubsubsection][style=\it]
-
-\setuphead[section, subsection][number=yes]
-\setuphead[subsubsection][number=no]
 
 \setuplist[section][style=bold]
 \setuplist[subsection][margin=1cm]
@@ -116,25 +87,19 @@
 
 \definemeasure[cslhangindent][1.5em]
 \definenarrower[hangingreferences][left=\measure{cslhangindent}]
-\definestartstop[cslreferences][
-	before={%
+\definestartstop[cslreferences]
+  [before={%
 	  \starthangingreferences[left]
       \setupindenting[-\leftskip,yes,first]
       \doindentation
   	},
-  	after=\stophangingreferences,
-]
+  after=\stophangingreferences]
 
-\startsectionblockenvironment[frontpart]
-\setuppagenumbering[location=]
-\stopsectionblockenvironment
-
-\setupdelimitedtext[blockquote][
-  before={\blank[line]},
+\setupdelimitedtext[blockquote]
+  [before={\blank[line]},
   after={\blank[line]},
   leftmargin=1cm,
-  rightmargin=1cm,
-]
+  rightmargin=1cm]
 
 \starttext
 
