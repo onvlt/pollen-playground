@@ -21,45 +21,59 @@
 
 (define (em . elements)
   (case (current-poly-target)
-    [(context) (apply string-append `("{\\em " ,@elements "}"))]
+    [(context) (context-group "em" elements)]
     [else (txexpr 'em empty elements)]))
 
 (define (strong . elements)
   (case (current-poly-target)
-    [(context) (apply string-append `("{\\bf " ,@elements "}"))]
+    [(context) (context-group "bf" elements)]
     [else (txexpr 'strong empty elements)]))
 
 (define (title . elements)
   (case (current-poly-target)
-    [(context) (apply string-append `("\\chapter{" ,@elements "}"))]
+    [(context) (context-tag "chapter" elements)]
     [else (txexpr 'h1 empty elements)]))
 
 (define (heading . elements)
   (case (current-poly-target)
-    [(context) (apply string-append `("\\section{" ,@elements "}"))]
+    [(context) (context-tag "section" elements)]
     [else (txexpr 'h2 empty elements)]))
 
 (define (subheading . elements)
   (case (current-poly-target)
-    [(context) (apply string-append `("\\subsection{" ,@elements "}"))]
+    [(context) (context-tag "subsection" elements)]
     [else (txexpr 'h3 empty elements)]))
 
 (define (numbered-list . elements)
   (case (current-poly-target)
-    [(context) (apply string-append `("\\startitemize[n]\n" ,@elements "\n\\stopitemize"))]
+    [(context) (context-environment "itemize" elements #:params "n")]
     [else (txexpr 'ol empty elements)]))
 
 (define (bulleted-list . elements)
   (case (current-poly-target)
-    [(context) (apply string-append `("\\startitemize\n" ,@elements "\n\\stopitemize"))]
+    [(context) (context-environment "itemize" elements)]
     [else (txexpr 'ul empty elements)]))
 
 (define (item . elements)
   (case (current-poly-target)
-    [(context) (apply string-append `("\\item{" ,@elements "}"))]
+    [(context) (context-tag "item" elements)]
     [else (txexpr 'li empty elements)]))
 
 (define (blockquote . elements)
   (case (current-poly-target)
-    [(context) (apply string-append `("\\startblockquote\n" ,@elements "\n\\stopblockquote"))]
+    [(context) (context-environment "blockquote" elements)]
     [else (txexpr 'blockquote empty elements)]))
+
+; Context helpers
+(define (context-group name elements)
+  (apply string-append `("{\\" ,name " " ,@elements "}")))
+
+(define (context-tag name elements)
+  (apply string-append `("\\" ,name "{" ,@elements "}")))
+
+(define (context-environment name elements #:params (params #f))
+  (define params-string
+    (if params
+      (apply string-append `("[" ,params "]"))
+      ""))
+  (apply string-append `("\\start" ,name ,params-string "\n" ,@elements "\n\\stop" ,name)))
