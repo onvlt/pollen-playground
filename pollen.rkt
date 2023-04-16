@@ -72,8 +72,5 @@
   (apply string-append `("\\" ,name "{" ,@elements "}")))
 
 (define (context-environment name elements #:params (params #f))
-  (define params-string
-    (if params
-      (apply string-append `("[" ,params "]"))
-      ""))
+  (define params-string (if params (string-append "[" params "]") ""))
   (apply string-append `("\\start" ,name ,params-string "\n" ,@elements "\n\\stop" ,name)))
