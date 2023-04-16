@@ -1,29 +1,38 @@
 #lang racket/base
-(require pollen/setup pollen/decode pollen/misc/tutorial txexpr)
+(require pollen/tag pollen/setup pollen/decode pollen/misc/tutorial racket/list racket/string racket/match txexpr)
 (provide (all-defined-out))
 
+
 ; Project metadata
+
 (define author "Ondřej Nývlt")
 (define theme-color "hsl(5 70% 45%)")
 
+
 ; Pollen setup
+
 (module setup racket/base
   (provide (all-defined-out))
   (define poly-targets '(html context)))
 
 ; Transform output
+
 (define (root . elements)
   (case (current-poly-target)
     [(context) (txexpr 'root empty elements)]
     [else (txexpr 'root empty (decode-elements elements
       #:txexpr-elements-proc decode-paragraphs
-      #:string-proc (compose1 smart-quotes smart-dashes)))]))
+      #:string-proc (lambda (xexpr) (smart-quotes xexpr
+        #:double-open "„" #:double-close "“"
+        #:single-open "‚" #:single-close "‘"))))]))
 
+; Emphasis (= usually italics)
 (define (em . elements)
   (case (current-poly-target)
     [(context) (context-group "em" elements)]
     [else (txexpr 'em empty elements)]))
 
+; Strong emphasis (= usually bold text)
 (define (strong . elements)
   (case (current-poly-target)
     [(context) (context-group "bf" elements)]
@@ -64,7 +73,26 @@
     [(context) (context-environment "blockquote" elements)]
     [else (txexpr 'blockquote empty elements)]))
 
+(define (quick-table . elements)
+  (define rows-of-text-cells
+    (let ([text-rows (filter-not whitespace? elements)])
+      (for/list ([text-row (in-list text-rows)])
+                (for/list ([text-cell (in-list (string-split text-row "|"))])
+                          (string-trim text-cell)))))
+
+  (match-define (list tr-tag td-tag th-tag) (map default-tag-function '(tr td th)))
+
+  (define html-rows
+    (match-let ([(cons header-row other-rows) rows-of-text-cells])
+      (cons (map th-tag header-row)
+            (for/list ([row (in-list other-rows)])
+                      (map td-tag row)))))
+
+  (cons 'table (for/list ([html-row (in-list html-rows)])
+                         (apply tr-tag html-row))))
+
 ; Context helpers
+
 (define (context-group name elements)
   (apply string-append `("{\\" ,name " " ,@elements "}")))
 

@@ -1,16 +1,14 @@
-.PHONY: all clean
+.PHONY: clean
 .DEFAULT_GOAL := all
 
-all: index.html index.context index.pdf
+%.html:
+	raco pollen render $@
 
-index.html:
-	raco pollen render index.html
+%.context:
+	raco pollen render $@
 
-index.context:
-	raco pollen render index.context
-
-index.pdf: index.context
-	context index.context
+%.pdf: %.context
+	context $^
 
 clean:
-	rm -rf index.{context,html,log,pdf,tuc,css} index-export compiled
+	rm -rf *.{context,html,log,pdf,tuc,css} *-export compiled
