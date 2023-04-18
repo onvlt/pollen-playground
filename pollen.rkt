@@ -85,24 +85,41 @@
     [(context) (context-environment "blockquote" elements)]
     [else (txexpr 'blockquote empty elements)]))
 
-(define (quick-table . elements)
+(define-tag-function (quick-table attrs elements)
+  ; (listof (listof string))
   (define rows-of-text-cells
     (let ([text-rows (filter-not whitespace? elements)])
       (for/list ([text-row (in-list text-rows)])
-        (for/list ([text-cell (in-list (string-split text-row "|"))])
+        (for/list ([text-cell (in-list (string-split text-row "|" #:trim? #f))])
           (string-trim text-cell)))))
 
-  (match-define (list tr-tag td-tag th-tag) (map default-tag-function '(tr td th)))
+  (case (current-poly-target)
+    [(context)
+     (define context-rows
+       (for/list ([row (in-list rows-of-text-cells)])
+         (string-join row "\\NC " #:before-first "\\NC " #:after-last " \\AR\n")))
 
-  (define html-rows
-    (match-let ([(cons header-row other-rows) rows-of-text-cells])
-      (cons (map th-tag header-row)
-            (for/list ([row (in-list other-rows)])
-              (map td-tag row)))))
+     (define context-table
+       (context-environment
+        "table" context-rows
+        #:params (cadr (assoc 'coldef attrs))))
 
-  (cons 'table
-        (for/list ([html-row (in-list html-rows)])
-          (apply tr-tag html-row))))
+     context-table]
+    [else
+     (match-define (list tr-tag td-tag th-tag) (map default-tag-function '(tr td th)))
+
+     (define html-rows
+       (match-let ([(cons header-row other-rows) rows-of-text-cells])
+         (cons (map th-tag header-row)
+               (for/list ([row (in-list other-rows)])
+                 (map td-tag row)))))
+
+     (define html-table
+       (cons 'table
+             (for/list ([html-row (in-list html-rows)])
+               (apply tr-tag html-row))))
+
+     html-table]))
 
 ; Context helpers
 

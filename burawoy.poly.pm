@@ -2,10 +2,10 @@
 
 Michael Burawoy v článku ◊em{The Extended Case Method} z roku 1998 popisuje stejnojmennou metodu, která využívá reflexivní přístup k tomu, aby z pozorování partikulárního každodenního života překračovala k širokému kontextu okolních procesů, tendencí a sil, a od jednotlivostí postupovala k obecné teorii. ◊em{Reflexivní vědu} vymezuje vůči ◊em{pozitivní vědě}. Pozitivní věda oceňuje oddělení vědce a zkoumaného subjektu, zatímco reflexivní věda znamená účast vědce v sociální realitě, kterou zkoumá. Obě metody mají své limity. Na své studii Burawoy ukazuje výhody i nedostatky metody rozšířené případové studie.
 
-◊quick-table{
-| Pozitivní věda | Reflexive science
-Metoda | Dotazník | Rozšířená případová studie
-Techniky empirického zkoumání | Dotazník | Rozhovory a pozorování
+◊quick-table[#:coldef "|l|l|l|"]{
+| Pozitivní věda | Reflexivní věda
+Metoda | Dotazník | Rozšířený případ
+Techniky empirického zkoumání | Survey | Rozhovory a pozorování
 Vztah vědce k subjektu | Izolace | Participace
 Limity | Účinky kontextu | Účinky moci
 Měřítko objektivity | Procedury | Nárůst vědění
