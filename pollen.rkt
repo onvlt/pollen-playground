@@ -97,7 +97,10 @@
     [(context)
      (define context-rows
        (for/list ([row (in-list rows-of-text-cells)])
-         (string-join row "\\NC " #:before-first "\\NC " #:after-last " \\AR\n")))
+         (case row
+           [(("---")) "\\HL\n"]
+           [else (string-join row "\\NC " #:before-first "\\NC " #:after-last " \\AR\n")])
+         ))
 
      (define context-table
        (context-environment

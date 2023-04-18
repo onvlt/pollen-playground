@@ -4,6 +4,7 @@ Michael Burawoy v článku ◊em{The Extended Case Method} z roku 1998 popisuje 
 
 ◊quick-table[#:coldef "|l|l|l|"]{
 | Pozitivní věda | Reflexivní věda
+---
 Metoda | Dotazník | Rozšířený případ
 Techniky empirického zkoumání | Survey | Rozhovory a pozorování
 Vztah vědce k subjektu | Izolace | Participace
