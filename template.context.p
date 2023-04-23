@@ -28,9 +28,7 @@
   protrusion=quality,
   expansion=quality,
   itlc=yes,
-  textitalics=yes,
-  onum=yes,
-  pnum=yes]
+  textitalics=yes]
 
 \definefontfeature[smallcaps]
   [script=latn,
@@ -106,8 +104,9 @@
 
 \starttext
 
-{\bf ◊(select 'title metas)}\\
-{\em ◊|author|}
+{\bf ◊(select 'title metas)}
+\blank[halfline]
+◊|author|
 
 \blank[2*line]
 
