@@ -9,6 +9,7 @@
 
 %.pdf: %.context
 	context $^
+	open $@
 
 clean:
 	rm -rf *.{context,html,log,pdf,tuc,css} *-export compiled

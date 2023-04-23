@@ -19,6 +19,9 @@
 \setupbackend[export=yes]
 \setupstructure[state=start,method=auto]
 
+◊; \setupheader[style=\tfx]
+◊; \setupheadertexts[◊(select 'title-short metas)][◊|author|]
+
 % use microtypography
 \definefontfeature[default][default]
   [script=latn,
@@ -54,7 +57,7 @@
 \setupinterlinespace[line=3.2ex]
 
 \setuphead[chapter][style={\tfc\setupinterlinespace[line=3ex]}]
-\setuphead[section][style={\tfa\bf}]
+\setuphead[section][style={\bf\setupinterlinespace[line=3ex]}]
 \setuphead[subsection][style=\bf]
 \setuphead[chapter, section, subsection]
   [number=no,
@@ -103,8 +106,11 @@
 
 \starttext
 
-\startbodymatter
+{\bf ◊(select 'title metas)}\\
+{\em ◊|author|}
+
+\blank[2*line]
+
 ◊(apply string-append (filter string? (flatten doc)))
-\stopbodymatter
 
 \stoptext
