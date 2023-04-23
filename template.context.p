@@ -47,7 +47,7 @@
 \setupbodyfontenvironment[default][em=italic]
 
 \definefallbackfamily[mainface][rm][CMU Serif][preset=range:greek, force=yes]
-\definefontfamily[mainface][rm][IBM Plex Serif]
+\definefontfamily[mainface][rm][Libre Caslon Text]
 \definefontfamily[mainface][mm][IBM Plex Serif]
 \definefontfamily[mainface][ss][IBM Plex Sans]
 \definefontfamily[mainface][tt][IBM Plex Mono][features=none]
